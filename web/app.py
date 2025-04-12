@@ -35,7 +35,7 @@ lemmatizer = WordNetLemmatizer()
 def generate_synonyms(query: str) -> List[str]:
     """Generate synonyms for the query using Gemini API."""
     prompt = f"""Given the research query: "{query}"
-Generate 1 different variations of this query that a researcher might use to search for the same topic.
+Generate 9 different variations of this query that a researcher might use to search for the same topic.
 Focus on academic and technical variations. The variations should be different from the original query.
 Avoid using generic words like "research", "study", "explore", "investigate".
 Return only the variations, one per line, without any additional text or numbering."""
@@ -152,7 +152,7 @@ def search():
                         FROM workshops
                         WHERE abstract_embedding IS NOT NULL
                         ORDER BY distance
-                        LIMIT 10
+                        LIMIT 20
                     """, (query_embedding,))
                     
                     for row in cur.fetchall():
@@ -167,7 +167,7 @@ def search():
                         combined_text = combined_text.replace("'", "").replace("-", "")
                         keyword_exists = [keyword in combined_text for keyword in all_keywords]
                         exists_ratio = sum(keyword_exists) / len(all_keywords) if all_keywords else 1.0
-                        if exists_ratio < 0.3:
+                        if exists_ratio < 0.6:
                             continue
                         seen_titles.add(title)
                         all_results.append({
@@ -189,7 +189,7 @@ def search():
                         FROM papers
                         WHERE title_embedding IS NOT NULL AND abstract_embedding IS NOT NULL
                         ORDER BY distance
-                        LIMIT 20
+                        LIMIT 50
                     """, (query_embedding, query_embedding))
                     
                     for row in cur.fetchall():
@@ -215,7 +215,7 @@ def search():
                             'score': (1 - row[5]),   # Convert distance to similarity score
                             'type': 'paper'
                         })
-
+                        
                 print("All results: ", all_results)
 
         # Sort all results by type (workshops first) and then by score
