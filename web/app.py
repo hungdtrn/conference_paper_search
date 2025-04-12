@@ -189,7 +189,7 @@ def search():
                         FROM papers
                         WHERE title_embedding IS NOT NULL AND abstract_embedding IS NOT NULL
                         ORDER BY distance
-                        LIMIT 50
+                        LIMIT 20
                     """, (query_embedding, query_embedding))
                     
                     for row in cur.fetchall():
@@ -215,7 +215,7 @@ def search():
                             'score': (1 - row[5]),   # Convert distance to similarity score
                             'type': 'paper'
                         })
-                        
+
                 print("All results: ", all_results)
 
         # Sort all results by type (workshops first) and then by score
