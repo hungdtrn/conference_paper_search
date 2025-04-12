@@ -212,6 +212,8 @@ def search():
         # Sort all results by type (workshops first) and then by score
         all_results.sort(key=lambda x: (x['type'] == 'workshop', -x['score']))
         all_results.sort(key=lambda x: (x['type'] != 'workshop', -x['score']))
+
+        print("All results: ", all_results)
         return jsonify(all_results[:20])
             
     except Exception as e:
