@@ -38,7 +38,7 @@ parse-torrent-title==2.4
 pillow==11.1.0
 proto-plus==1.25.0
 protobuf==5.29.2
-psycopg2==2.9.10
+psycopg2-binary
 pyasn1==0.6.1
 pyasn1_modules==0.4.1
 pydantic==2.11.3
