@@ -35,7 +35,7 @@ lemmatizer = WordNetLemmatizer()
 def generate_synonyms(query: str) -> List[str]:
     """Generate synonyms for the query using Gemini API."""
     prompt = f"""Given the research query: "{query}"
-Generate 9 different variations of this query that a researcher might use to search for the same topic.
+Generate 4 different variations of this query that a researcher might use to search for the same topic.
 Focus on academic and technical variations. The variations should be different from the original query.
 Avoid using generic words like "research", "study", "explore", "investigate".
 Return only the variations, one per line, without any additional text or numbering."""
@@ -152,7 +152,7 @@ def search():
                         FROM workshops
                         WHERE abstract_embedding IS NOT NULL
                         ORDER BY distance
-                        LIMIT 20
+                        LIMIT 10
                     """, (query_embedding,))
                     
                     for row in cur.fetchall():
@@ -189,7 +189,7 @@ def search():
                         FROM papers
                         WHERE title_embedding IS NOT NULL AND abstract_embedding IS NOT NULL
                         ORDER BY distance
-                        LIMIT 20
+                        LIMIT 10
                     """, (query_embedding, query_embedding))
                     
                     for row in cur.fetchall():
