@@ -179,6 +179,8 @@ def search():
                             'type': 'workshop'
                         })
 
+                print("All results: ", all_results)
+
                 # Search papers if enabled
                 if search_papers:
                     cur.execute("""
@@ -213,7 +215,9 @@ def search():
                             'score': (1 - row[5]),   # Convert distance to similarity score
                             'type': 'paper'
                         })
-        
+                        
+                print("All results: ", all_results)
+
         # Sort all results by type (workshops first) and then by score
         all_results.sort(key=lambda x: (x['type'] == 'workshop', -x['score']))
         all_results.sort(key=lambda x: (x['type'] != 'workshop', -x['score']))
