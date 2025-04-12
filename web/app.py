@@ -11,11 +11,14 @@ from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 from typing import List, Set
 
+
+nltk.data.path.append("/tmp")
+
 # Download required NLTK data
-nltk.download('punkt')
-nltk.download('stopwords')
-nltk.download('wordnet')
-nltk.download('punkt_tab')
+nltk.download('punkt', download_dir='/tmp')
+nltk.download('stopwords', download_dir='/tmp')
+nltk.download('wordnet', download_dir='/tmp')
+nltk.download('punkt_tab', download_dir='/tmp')
 
 # Load environment variables
 load_dotenv()
