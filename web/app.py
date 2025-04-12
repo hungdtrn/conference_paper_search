@@ -127,7 +127,12 @@ def search():
         return jsonify([])
     
     # Connect to database and perform semantic search
-    conn = get_db_connection()
+    try:
+        conn = get_db_connection()
+    except Exception as e:
+        print(f"Error connecting to database: {e}")
+        return jsonify([])
+    
     try:
         all_results = []
         seen_titles = set()
@@ -213,7 +218,6 @@ def search():
         all_results.sort(key=lambda x: (x['type'] == 'workshop', -x['score']))
         all_results.sort(key=lambda x: (x['type'] != 'workshop', -x['score']))
 
-        print("All results: ", all_results)
         return jsonify(all_results[:20])
             
     except Exception as e:
