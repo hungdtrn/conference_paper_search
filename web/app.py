@@ -152,7 +152,7 @@ def search():
                         FROM workshops
                         WHERE abstract_embedding IS NOT NULL
                         ORDER BY distance
-                        LIMIT 20
+                        LIMIT 10
                     """, (query_embedding,))
                     
                     for row in cur.fetchall():
