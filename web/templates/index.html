@@ -120,9 +120,16 @@
                             </div>
                         ` : ''}
                         ${paper.link ? `
-                            <a href="${paper.link}" target="_blank" class="text-blue-500 hover:text-blue-700">
-                                View ${paper.type === 'workshop' ? 'Workshop' : 'Paper'}
-                            </a>
+                            <div class="flex space-x-4">
+                                <a href="${paper.link}" target="_blank" class="text-blue-500 hover:text-blue-700">
+                                    View ${paper.type === 'workshop' ? 'Workshop' : 'Paper'}
+                                </a>
+                                ${paper.type === 'paper' && paper.pdf_url ? `
+                                    <a href="${paper.pdf_url}" target="_blank" class="text-blue-500 hover:text-blue-700">
+                                        View PDF
+                                    </a>
+                                ` : ''}
+                            </div>
                         ` : ''}
                     </div>
                 `).join('');
@@ -141,4 +148,4 @@
         });
     </script>
 </body>
-</html> 
+</html>
