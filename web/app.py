@@ -167,7 +167,7 @@ def search():
                         combined_text = combined_text.replace("'", "").replace("-", "")
                         keyword_exists = [keyword in combined_text for keyword in all_keywords]
                         exists_ratio = sum(keyword_exists) / len(all_keywords) if all_keywords else 1.0
-                        if exists_ratio < 0.6:
+                        if exists_ratio < 0.3:
                             continue
                         seen_titles.add(title)
                         all_results.append({
